@@ -45,11 +45,25 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/contact" style="color: yellow;">Contact</a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    
+                        <li class="nav-item"><a class="nav-link" style="color: yellow;" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" style="color: yellow;" href="{% url 'logout' %}">Log out</a></li>
+                    
+                    {% else %}
+                    
+                        <li class="nav-item"><a class="nav-link" style="color: yellow;" href="{% url 'login' %}">Log in</a></li>
+                        <li class="nav-item"><a class="nav-link" style="color: yellow;" href="{% url 'register' %}">Sign up</a></li>
+                    
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container mt-3">
+        {% block content %}
+  <h1>Welcome, {{ request.user.username }}!</h1>
+  {% endblock %}
         <h3 style="text-align: center; font-weight: 400;">CURRENT LOCATION</h3>
         <!-- <h3 style="text-align: center; font-weight: 800;">Shwetank Seth</h3> -->
 
